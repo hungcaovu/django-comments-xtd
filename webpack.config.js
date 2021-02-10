@@ -14,7 +14,7 @@ module.exports = {
   },
   output: {
     filename: '[name]-2.8.2.js',
-    path: STATIC_DIR
+    path: path.resolve(__dirname, '../08.static/assets/js')
   },
   optimization: {
     splitChunks: {

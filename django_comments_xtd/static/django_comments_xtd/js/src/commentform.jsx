@@ -394,7 +394,7 @@ export class CommentForm extends React.Component {
       btn_preview_class += " btn-sm";
     }
     var btn_label_preview = django.gettext("preview");
-    var btn_label_send = django.gettext("send");
+    var btn_label_send = django.gettext("Post Comment");
     
     return (
       <form method="POST" onSubmit={this.handle_submit}>
