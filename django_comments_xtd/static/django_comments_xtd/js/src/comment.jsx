@@ -66,7 +66,7 @@ export class Comment extends React.Component {
     if(this.props.data.user_moderator) {
       var label = django.gettext("moderator");
       moderator = (
-        <span>&nbsp;
+        <span>
         <span className="badge badge-secondary">{label}</span>
         </span>
       );
@@ -167,7 +167,7 @@ export class Comment extends React.Component {
         });
         users = users.join("<br/>");
         show_users_chunk = (
-          <span>&nbsp;<a className="badge badge-primary text-white cfb-counter"
+          <span><a className="cfb-counter pl-1"
                          data-toggle="tooltip" title={users}>
             {this.state[attr_list].length}
           </a></span>
@@ -185,10 +185,10 @@ export class Comment extends React.Component {
     else opinion = django.gettext('I dislike it');
 
     return (
-      <span>{show_users_chunk}&nbsp;<a href="#" onClick={click_hdl}
+      <span className="mr-3"><a href="#" onClick={click_hdl}
                                        className={css_class}>
         <i className={class_icon} title={opinion}>
-        </i></a>&nbsp;</span>);
+        </i></a>{show_users_chunk}</span>);
   }
 
   render_feedback_btns() {
@@ -203,7 +203,7 @@ export class Comment extends React.Component {
       let like_feedback = this._get_feedback_chunk("like");
       let dislike_feedback = this._get_feedback_chunk("dislike");
       return (<span id={feedback_id} className="small">{like_feedback}
-                <span className="text-muted">|</span>{dislike_feedback}</span>);
+                <span className="text-muted"></span>{dislike_feedback}</span>);
     } else
       return null;
   }
@@ -243,14 +243,14 @@ export class Comment extends React.Component {
 
     if(this.props.settings.allow_feedback) {
       return (
-        <span>&nbsp;&nbsp;<span className="text-muted">&bull;</span>&nbsp;&nbsp;
-          <a className="small mutedlink" href={url}
-             onClick={this.handle_reply_click}>{reply_label}</a>
+        <span><span className="text-muted"></span>
+          <a className="pl-4 small mutedlink" href={url}
+             onClick={this.handle_reply_click}><i class="fas fa-reply"></i> {reply_label}</a>
         </span>
       );
     } else {
-      return (<a className="small mutedlink" href={url}
-              onClick={this.handle_reply_click}>{reply_label}</a>);
+      return (<a className="pl-4 small mutedlink" href={url}
+              onClick={this.handle_reply_click}><i class="fas fa-reply"></i> {reply_label}</a>);
     }
   }
 
@@ -389,7 +389,7 @@ export class Comment extends React.Component {
     if (this.props.newcids.indexOf(this.props.data.id) > -1) {
       new_label = (
         <span>
-          <span className="badge badge-success">new</span>&nbsp;-&nbsp;
+          <span className="badge badge-success mr-3">new</span>
         </span>
       );
     }
@@ -409,24 +409,41 @@ export class Comment extends React.Component {
     }
 
     return (
-      <div className="media" id={comment_id}>
-        <img src={this.props.data.user_avatar}
-             className="mr-3" height="48" width="48" />
-        <div className="media-body">
-          <div className="comment pb-3">
+      <div className="comment_list mt-4" id={comment_id}>
+        <div className="d-flex">
+          <div>
+            <img src={this.props.data.user_avatar}
+                className="mr-3 rounded-circle" height="50" width="50" />
             <a name={comment_id}></a>
-            <h6 className="mb-1 small d-flex">
-              <div className="mr-auto">
-                {new_label}{this.props.data.submit_date}&nbsp;-&nbsp;{user_name}
-                &nbsp;&nbsp;
-                <a className="permalink" href={this.props.data.permalink}>¶</a>
-              </div>
-              {right_div}
-            </h6>
-            {comment_body}{feedback_btns}{reply_link}
-            {reply_form}
           </div>
-          {children}
+
+          <div className="comment_item-body">
+            <p className="font-weight-bold text-primary">{user_name}</p>
+            <div className="small ">
+              <i class="far fa-clock mr-2"></i>
+              {new_label}{this.props.data.submit_date}
+              {/* <a className="permalink" href={this.props.data.permalink}>¶</a> */}
+            </div>
+            {right_div}
+          </div>
+        </div>
+
+        <div className="pl-2">
+          <div className="comment_item-line">
+            <div className="mt-3 mb-1">
+              {comment_body}
+            </div>
+            <div>
+              {feedback_btns}{reply_link}
+            </div>
+            <div className="mt-3">
+              {reply_form}
+            </div>
+          </div>
+          
+          <div className="pl-4">
+            {children}
+          </div>
         </div>
       </div>
     );
