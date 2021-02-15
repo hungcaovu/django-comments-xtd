@@ -192,7 +192,7 @@ COMMENTS_XTD_APP_MODEL_OPTIONS = {
 }
 # COMMENTS_XTD_API_USER_REPR = lambda u: u.get_full_name()
 
-LOGIN_URL = "/admin/login/"
+LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = LOGIN_URL
 
 DEBUG_TOOLBAR_PANELS = [
