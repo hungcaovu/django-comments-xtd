@@ -91,6 +91,7 @@ export class CommentForm extends React.Component {
     return (
       <div className={div_cssc}>
         <div className="col-md-12">
+          <label htmlFor="id_comment" className="form-control-sm">Comment</label>
           <textarea required name="comment" id="id_comment"
                     placeholder={placeholder} maxLength="3000"
                     rows="3"
@@ -107,7 +108,7 @@ export class CommentForm extends React.Component {
     if(this.props.is_authenticated && !this.props.request_name)
       return "";
     let div_cssc = "form-group row",
-        label_cssc = "col-form-label",
+        label_cssc = "col-form-label form-control-sm",
         input_cssc = "form-control",
         help = "";
     const placeholder = django.gettext('Name (required)');
@@ -122,10 +123,10 @@ export class CommentForm extends React.Component {
     }
     return (
       <div className={div_cssc}>
-        {/* <label htmlFor="id_name" className={label_cssc}>
-          {django.gettext("Name")}
-        </label> */}
         <div className="col-md-12">
+          <label htmlFor="id_name" className={label_cssc}>
+            {django.gettext("Name")}
+          </label>
           <input type="text" name="name" required id="id_name"
                  value={this.state.name} placeholder={placeholder}
                  onChange={this.handle_input_change}
@@ -141,7 +142,7 @@ export class CommentForm extends React.Component {
     if(this.props.is_authenticated && !this.props.request_email_address)
       return "";
     let div_cssc = "form-group row",
-        label_cssc = "col-form-label",
+        label_cssc = "col-form-label form-control-sm",
         input_cssc = "form-control",
         help_cssc = "form-text small",
         helptext_style = {};
@@ -159,10 +160,10 @@ export class CommentForm extends React.Component {
     }
     return (
       <div className={div_cssc}>
-        {/* <label htmlFor="id_email" className={label_cssc}>
-          {django.gettext("Mail")}
-        </label> */}
         <div className="col-md-12">
+          <label htmlFor="id_email" className={label_cssc}>
+            {django.gettext("Mail")}
+          </label>
           <input type="text" name="email" required id="id_email"
                  value={this.state.email} placeholder={placeholder}
                  onChange={this.handle_input_change}
@@ -178,7 +179,7 @@ export class CommentForm extends React.Component {
   render_field_url() {
     if(this.props.is_authenticated)
       return "";
-    let label_cssc = "col-form-label",
+    let label_cssc = "col-form-label form-control-sm",
         input_cssc = "form-control";
     if(this.state.reply_to > 0) {
       label_cssc += " form-control-sml";
@@ -443,7 +444,7 @@ export class CommentForm extends React.Component {
     let div_class = "comment-block mt-2";
     var label = django.gettext("Leave a reply");
     if(this.state.reply_to == 0) {
-      header = <h4 className="comment-title pb-3">{label}</h4>;
+      header = <div className="comment-title pb-3 fs-4">{label}</div>;
       div_class = "comment-block";
     }
     let alert_div = "";
@@ -460,7 +461,21 @@ export class CommentForm extends React.Component {
               {preview}
               <div className={div_class}>
                 <div className="comment-body">
-                  {header}
+                  <div className="row">
+                    <div className="col-md-4">
+                      {header}
+                    </div>
+                    <div className="col-md-8 text-md-right comment-social">
+                      <span>Login with </span>
+                      <span class="social_login social_login-small">
+                        <a title="Google" class=" btn-social google" href="/en/accounts/google/login/?process=login">
+                          <i class="fab fa-google"></i></a>
+                        <a title="Facebook" class=" btn-social facebook" href="/en/accounts/facebook/login/?process=login">
+                          <i class="fab fa-facebook-f"></i></a>
+                      </span>
+                    </div>
+                  </div>
+                  
                   {alert_div}
                   {form}
                 </div>

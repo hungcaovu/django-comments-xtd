@@ -244,12 +244,12 @@ export class Comment extends React.Component {
     if(this.props.settings.allow_feedback) {
       return (
         <span><span className="text-muted"></span>
-          <a className="pl-4 small mutedlink" href={url}
+          <a className="pl-4 small " href={url}
              onClick={this.handle_reply_click}><i class="fas fa-reply"></i> {reply_label}</a>
         </span>
       );
     } else {
-      return (<a className="pl-4 small mutedlink" href={url}
+      return (<a className="pl-4 small " href={url}
               onClick={this.handle_reply_click}><i class="fas fa-reply"></i> {reply_label}</a>);
     }
   }
